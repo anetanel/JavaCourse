@@ -20,6 +20,7 @@ public class ImdbUI {
 		boolean done = false;
 		String[] tokens;
 		String availableCommands = "Available commands: " + 
+										ADD_CMD + ", " + 
 										ADD_ACTOR_CMD + ", " + 
 										VOTE_CMD + ", " + 
 										GET_CMD + ", " + 
@@ -65,15 +66,15 @@ public class ImdbUI {
 				addActor(imdb, tokens);
 				break;
 
-			case "save":
+			case SAVE_CMD:
 				save(imdb);
 				break;
 
-			case "load":
+			case LOAD_CMD:
 				load(imdb);
 				break;
 
-			case "done":
+			case DONE_CMD:
 				// End the loop
 				done = true;
 				System.out.println("Bye bye...");
