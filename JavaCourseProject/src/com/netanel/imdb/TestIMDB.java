@@ -102,6 +102,9 @@ public class TestIMDB {
 //		System.out.println("*****************************");
 		IMDB imdb = new IMDB();
 		imdb.addMovie("Kill Bill", new HashSet<>(Arrays.asList("Uma Thurman", "Lucy Liu")));
+		imdb.addMovie("Kill Bill2", new HashSet<>(Arrays.asList("Uma Thurman", "Lucy Liu")));
+		imdb.addMovie("Pulp Fiction", new HashSet<>(Arrays.asList("Uma Thurman", "Bruce Willis")));
+		imdb.addMovie("Star Wars", new HashSet<>(Arrays.asList("Mark Hammil", "Harisson Ford")));
 //		imdb.addMovie("ATest2", new HashSet<>(Arrays.asList("Sami2", "Susu2")));
 //		imdb.addMovie("BTest3", new HashSet<>(Arrays.asList("Sami3", "Susu3")));
 //		imdb.addMovie("TTest4", new HashSet<>(Arrays.asList("Sami4", "Susu4")));
@@ -153,6 +156,12 @@ public class TestIMDB {
 //		IMDB b2 = (IMDB)in.readObject();
 //		in.close();
 //		ImdbUI.runUI(b2);
-		
+		//System.out.println(imdb.getMovies().get("Star Wars").getActors().contains("Mark Hamil"));
+//		for (Movie movie : imdb.getAll()) {
+//			if (movie.getActors().contains("Uma Thurman")) {
+//				System.out.println(movie.getName());
+//			};
+//		}
+//		System.out.println(imdb.getByActor("Uma Thurman"));
 	}
 }

@@ -90,4 +90,15 @@ public class IMDB implements Serializable{
 		in.close();
 	}
 	
+	public Set<Movie> getByActor(String actor){
+		//Return Set of all Movies by an actor
+		Set<Movie> movieByActor = new HashSet<>();
+		for (Movie movie : movies.values()) {
+			if (movie.getActors().contains(actor)) {
+				movieByActor.add(movie);
+			}
+		}
+
+		return movieByActor;
+	}
 }
