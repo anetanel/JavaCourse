@@ -47,6 +47,7 @@ public class Robber implements Runnable {
 			} else {
 				try {
 					synchronized (treasureChest) {
+						//System.out.println("I, Robber No." + robberID + " will wait untill the chest is full again");
 						treasureChest.wait();
 					}
 				} catch (InterruptedException e) {
