@@ -18,7 +18,9 @@ public class Rothschild implements Runnable {
 	public void run() {
 		int addedCoins;
 		while (bankAccount > 0) {
-			addedCoins = (int) (Math.random() * 10);
+			// Every 3 seconds, as log as the bank account is in surplus, add a random number of coins to the chest
+			// and remove the same amount from the bank account.
+			addedCoins = (int)(Math.random() * 10);
 			treasureChest.addCoins(addedCoins);
 			bankAccount -= addedCoins;
 			System.out.println(Thread.currentThread().getName() + " added " + addedCoins
@@ -33,6 +35,5 @@ public class Rothschild implements Runnable {
 			}
 		}
 		System.out.println(Thread.currentThread().getName() + " I'm done.");
-		// System.exit(0);
 	}
 }

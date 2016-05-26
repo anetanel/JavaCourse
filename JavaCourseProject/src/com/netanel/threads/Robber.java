@@ -25,6 +25,7 @@ public class Robber implements Runnable {
 	}
 
 	public void stopPlease() {
+		// set the stop flag and notify threads waiting for treasureChest
 		this.stop = true;
 		synchronized (treasureChest) {
 			treasureChest.notify();
@@ -32,20 +33,20 @@ public class Robber implements Runnable {
 	}
 
 	public void run() {
+		// Run as long as the stop flag is false
 		while (!stop) {
 			if (!treasureChest.isEmpty()) {
 				try {
-//					treasureChest.robCoin();
-//					System.out.println(
-//							"I, Robber No." + robberID + " stole a coin. left in the chest: " + treasureChest.getCoins());
+					// Rob a coin and get the number of coins left. 
+					int leftInChest = treasureChest.robCoin();
 					System.out.println(
-							"I, Robber No." + robberID + " stole a coin. left in the chest: " + treasureChest.robCoin());
-
+							"I, Robber No." + robberID + " stole a coin. left in the chest: " + leftInChest);
 				} catch (Exception e) {
 					System.out.println("I, Robber No." + robberID + " tried to steal a coin, but the chest was empty.");
 				}
 			} else {
 				try {
+					// If chest is empty, wait for it to become full again
 					synchronized (treasureChest) {
 						//System.out.println("I, Robber No." + robberID + " will wait untill the chest is full again");
 						treasureChest.wait();
@@ -55,7 +56,7 @@ public class Robber implements Runnable {
 				}
 			}
 		}
-
+		// Print on exit
 		System.out.println("Robber No." + robberID + " has left the building.");
 	}
 
