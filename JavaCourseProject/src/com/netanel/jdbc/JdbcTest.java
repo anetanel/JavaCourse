@@ -4,42 +4,56 @@ import java.sql.*;
 
 public class JdbcTest {
 	public static void main(String[] args) {
-		String dbClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+		// Set Driver, URL and DB name
+		String dbDriver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost/world?user=root&password=password";
+		String dbName = "world.country";
+		// Load driver
 		try {
-			Class.forName(dbClass);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Class.forName(dbDriver);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
 		}
-		
+
 		System.out.println("----------- DRIVER LOADED -----------------");
-		
-		String url = "jdbc:sqlserver://localhost:1433;" +
-				   "databaseName=Northwind;integratedSecurity=true;";
-		try {
-			Connection con = DriverManager.getConnection(url);
+		// Create a connection using ARM.
+		try (Connection con = DriverManager.getConnection(url)) {
+			// Create a Statement using the connection 
 			Statement stat = con.createStatement();
-			String sql = "SELECT * FROM [Northwind].[dbo].[Orders]";
-			
-			// 5. execute the command on the statement
+			// Construct an SQL query
+			String sql = "SELECT * FROM " + dbName;
+			// Execute the query and get the result into a Result Set
 			ResultSet rs = stat.executeQuery(sql);
-			while (rs.next())
-			{
-				System.out.println(rs.getInt(1));
-				System.out.println(rs.getString(2));
-				//System.out.println(rs.getString(4));
-				//System.out.println(rs.getInt("Population"));
-				System.out.println("*******************************");
+			// Get the Result Set Metadata
+			ResultSetMetaData rsmd = rs.getMetaData();
+			
+			// Print column header
+			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+				if (i > 1) {
+					System.out.print (", ");
+				}
+				System.out.print(rsmd.getColumnLabel(i));
 			}
+			System.out.println();
 			
-			
-			con.close();
+			while (rs.next()) {
+				// Iterate over the ResultSet 
+				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+					if (i > 1) {
+						System.out.print (", ");
+					}
+					// Get column type and print accordingly
+					int type = rsmd.getColumnType(i);
+					if (type == Types.VARCHAR || type == Types.CHAR) {
+						System.out.print(rs.getString(i));
+					} else {
+						System.out.print(rs.getLong(i));
+					}
+				}
+				System.out.println();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		 
 	}
 }
