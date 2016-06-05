@@ -11,6 +11,8 @@ public class Lab03 {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		f.setLocation(200, 200);
+		f.setResizable(false);
+		
 		// Create Panels 
 		JPanel labelPanel = new JPanel(new BorderLayout());
 		JPanel checkBoxPanel = new JPanel(new GridLayout(3,1));
@@ -23,6 +25,7 @@ public class Lab03 {
 		JLabel label = new JLabel("Connection User Interface");
 		label.setFont(new Font("Arial", Font.BOLD + Font.ITALIC, 25));
 		labelPanel.add(label, BorderLayout.WEST);
+		
 		// Check-boxes
 		JCheckBox chk1 = new JCheckBox("Proxy");
 		JCheckBox chk2 = new JCheckBox("Firewall");
@@ -35,6 +38,7 @@ public class Lab03 {
 		checkBoxPanel.add(chk1);
 		checkBoxPanel.add(chk2);
 		checkBoxPanel.add(chk3);
+		
 		// Radio Buttons
 		JLabel radioLabel = new JLabel("Files");
 		JRadioButton radio1 = new JRadioButton("Shared");
@@ -50,6 +54,7 @@ public class Lab03 {
 		radioPanel.add(radioLabel);
 		radioPanel.add(radio1);
 		radioPanel.add(radio2);
+		
 		// Buttons
 		Icon connectedIcon = new ImageIcon("files/icons/connected.png");
 		Icon disconnectedIcon = new ImageIcon("files/icons/disconnected.png");
@@ -69,10 +74,14 @@ public class Lab03 {
 		buttonsPanel.add(btnConnect);
 		buttonsPanel.add(btnDisconnect);
 		buttonsPanel.add(btnAway);
+		
 		// Combo Box
-		JLabel comboLabel = new JLabel("Choose User");
+		String comboText = "Choose User";
+		JLabel comboLabel = new JLabel(comboText);
 		String[] comboStr = {"User1", "User2", "User3"};
+		comboLabel.setToolTipText(comboText);
 		JComboBox<String> combo = new JComboBox<>(comboStr);
+		combo.setToolTipText(comboText);
 		
 		comboPanel.add(comboLabel);
 		comboPanel.add(combo);
@@ -85,6 +94,6 @@ public class Lab03 {
 		f.add(buttonsPanel, BorderLayout.CENTER);
 		f.add(comboPanel, BorderLayout.EAST);
 				
-		f.pack();		
+		f.pack();
 	}
 }
