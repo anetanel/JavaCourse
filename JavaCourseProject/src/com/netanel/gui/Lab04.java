@@ -47,7 +47,7 @@ public class Lab04 extends JFrame {
 	 */
 	public Lab04() {
 		setResizable(false);
-		setTitle("Celcius to Farenheit Converter");
+		setTitle("Celsius to Farenheit Converter");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 100);
 		contentPane = new JPanel();
