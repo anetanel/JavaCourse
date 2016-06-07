@@ -18,8 +18,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
 
+
 public class Lab04 extends JFrame {
 
+	//
+	// Attributes
+	//
 	private JPanel contentPane;
 	private JTextField txtEnterNumber;
 	private boolean firstClick = true;
@@ -46,20 +50,26 @@ public class Lab04 extends JFrame {
 	 * Create the frame.
 	 */
 	public Lab04() {
+		// Frame settings
 		setResizable(false);
 		setTitle("Celsius to Farenheit Converter");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 100);
+		// Main Panel
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(2, 2, 20, 2));
-		
+		// Text Area
 		txtEnterNumber = new JTextField();
 		txtEnterNumber.setForeground(Color.LIGHT_GRAY);
+		txtEnterNumber.setText("Enter number...");
+		contentPane.add(txtEnterNumber);
+		txtEnterNumber.setColumns(10);
 		txtEnterNumber.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Clear text area on first mouse click
 				if (firstClick) {
 					txtEnterNumber.setText(null);
 					txtEnterNumber.setForeground(Color.BLACK);
@@ -68,16 +78,13 @@ public class Lab04 extends JFrame {
 				
 			}
 		});
-		txtEnterNumber.setText("Enter number...");
-		contentPane.add(txtEnterNumber);
-		txtEnterNumber.setColumns(10);
-		
+		// Celsius Label
 		JLabel lblCelsius = new JLabel("Celsius");
 		lblCelsius.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(lblCelsius);
-		
+		// Farenheit Label is declared here to be used in the button action
 		JLabel lblFarenheit = new JLabel("---");
-		
+		// Button
 		btn1 = new JButton("Convert");
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,7 +97,7 @@ public class Lab04 extends JFrame {
 			}
 		});
 		contentPane.add(btn1);
-				
+		// Add Farenheit Label 	
 		lblFarenheit.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(lblFarenheit);
 	}

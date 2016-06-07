@@ -56,9 +56,9 @@ public class Lab03 {
 		radioPanel.add(radio2);
 		
 		// Buttons
-		Icon connectedIcon = new ImageIcon("files/icons/connected.png");
-		Icon disconnectedIcon = new ImageIcon("files/icons/disconnected.png");
-		Icon awayIcon = new ImageIcon("files/icons/away.png");
+		Icon connectedIcon = new ImageIcon(Lab03.class.getResource("/com/netanel/gui/icons/away.png"));
+		Icon disconnectedIcon = new ImageIcon(Lab03.class.getResource("/com/netanel/gui/icons/disconnected.png"));
+		Icon awayIcon = new ImageIcon(Lab03.class.getResource("/com/netanel/gui/icons/away.png"));
 		
 		JButton btnConnect = new JButton("Connect", connectedIcon);
 		JButton btnDisconnect = new JButton("Disconnect", disconnectedIcon);
