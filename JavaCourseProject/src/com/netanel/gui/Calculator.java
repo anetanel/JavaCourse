@@ -26,10 +26,11 @@ public class Calculator extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel display;
-	private double result = 0;
-	private boolean clearScreen = false;
+	private boolean newCalc = true;
+	private boolean clrScr = false;
+	private String displayStr = "0";
 	private String operation;
-
+	private double sum = 0;
 
 	/**
 	 * Launch the application.
@@ -58,7 +59,6 @@ public class Calculator extends JFrame {
 	public Calculator() {
 		setResizable(false);
 		ButtonListener listner = new ButtonListener();
-		String displayStr = "0";
 		setTitle("Calculator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 220, 230);
@@ -159,27 +159,43 @@ public class Calculator extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String btnStr = ((JButton) e.getSource()).getText();
-			if (btnStr.matches("[0-9]")) {
-				if (clearScreen) {
-					display.setText("");
-				}
-				if (display.getText().equals("0")) {
-					display.setText("");
-				}
-					display.setText(display.getText() + btnStr);
-			} else if (btnStr.matches("[+-/*]")) {
-				result = Double.parseDouble(display.getText());
-				operation = btnStr;
-				clearScreen = true;
-			} else if (btnStr.equals("=")) {
-				switch (operation){
-				case "+":
-					result = result + Double.parseDouble(display.getText());
-					break;
-				}
-				display.setText(Double.toString(result));
-			}
-
+			buttonParser(btnStr);
+			
 		}
+	}
+	public void buttonParser(String button) {
+		if (clrScr) {
+			displayStr = "";
+			updateDisplay(displayStr);
+		}
+		if (button.matches("[0-9]")) {
+			if (displayStr.equals("0")) {
+				displayStr = "";
+				updateDisplay(displayStr);
+			}
+			displayStr += button;
+			updateDisplay();
+		} else if (button.matches("[+-/*]")) {
+			sum = Double.parseDouble(displayStr);
+			operation = button;
+			if (newCalc) {
+				newCalc = false;
+				clrScr = true;
+			}
+			//operationHandler(operation);
+		} else if (button.equals("=")) {
+			
+		}
+		
+	}
+	public void updateDisplay() {
+		display.setText(displayStr);
+	}
+	public void updateDisplay(String displayStr) {
+		display.setText(displayStr);
+	}
+	
+	public void operationHandler(String operation) {
+		
 	}
 }
