@@ -1,5 +1,8 @@
 package com.netanel.coupons.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Set;
 
 import com.netanel.coupons.jbeans.Company;
@@ -9,8 +12,19 @@ public class CompanyDBDAO implements CompanyDAO {
 
 	@Override
 	public void createCompany(Company company) {
-		// TODO Auto-generated method stub
-
+		try {
+			Connection con = DB.connectDB("Company");
+			PreparedStatement createCompany = con.prepareStatement ("insert into Company values(?,?,?,?)");
+			createCompany.setLong(1, company.getId());
+			createCompany.setString(2, company.getCompName());
+			createCompany.setString(3, company.getPassword());
+			createCompany.setString(4, company.getEmail());
+			createCompany.executeUpdate();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
