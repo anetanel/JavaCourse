@@ -5,9 +5,9 @@ import java.sql.*;
 public class JdbcTest {
 	public static void main(String[] args) {
 		// Set Driver, URL and DB name
-		String dbDriver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost/world?user=root&password=password";
-		String dbName = "world.country";
+		String dbDriver = "org.sqlite.JDBC";
+		String url = "jdbc:sqlite:db/test.db";
+		String dbName = "mytable";
 		// Load driver
 		try {
 			Class.forName(dbDriver);
