@@ -11,7 +11,7 @@ public interface CompanyDAO {
 	
 	public void updateCompany(Company company);
 	
-	public Company getCmpany(long id);
+	public Company getCompany(long id);
 	
 	public Set<Company> getAllCompanies();
 	

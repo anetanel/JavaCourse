@@ -2,12 +2,14 @@ package com.netanel.coupons.jbeans;
 
 import java.util.HashSet;
 
+import com.netanel.coupons.exceptions.IdAlreadySetException;
+
 public class Company {
 	//
 	// Attributes
 	//
 	private static long idCount = 1;
-	private long id;
+	private long id=-1;
 	private String compName;
 	private String password;
 	private String email;
@@ -15,13 +17,24 @@ public class Company {
 	
 	
 	//
-	// Constructor
+	// Constructors
 	//
 	public Company(String compName, String password, String email) {
 		this.compName = compName;
 		this.password = password;
 		this.email = email;
-		this.id = idCount++;
+	}
+	
+	public Company(long newId, String compName, String password, String email) {
+		try {
+			setId(newId);
+		} catch (IdAlreadySetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.compName = compName;
+		this.password = password;
+		this.email = email;
 	}
 
 	//
@@ -48,9 +61,22 @@ public class Company {
 		return coupons;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId() throws IdAlreadySetException{
+		if (id == -1) {
+			id = idCount++;
+		} else {
+			throw new IllegalArgumentException("Only new IDs (-1) are allowed to be changed");
+		}
 	}
+	
+	private void setId(long newId) throws IdAlreadySetException{
+		if (id == -1) {
+			id = newId;
+		} else {
+			throw new IllegalArgumentException("Only new IDs (-1) are allowed to be changed");
+		}
+	}
+	
 	public void setCompName(String compName) {
 		this.compName = compName;
 	}

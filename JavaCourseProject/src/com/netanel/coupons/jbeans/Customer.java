@@ -37,9 +37,9 @@ public class Customer {
 		return coupons;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+//	public void setId(long id) {
+//		this.id = id;
+//	}
 
 	public void setCustName(String custName) {
 		this.custName = custName;
