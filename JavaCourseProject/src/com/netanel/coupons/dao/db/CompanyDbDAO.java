@@ -1,16 +1,19 @@
-package com.netanel.coupons.dao;
+package com.netanel.coupons.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Set;
 
+import com.netanel.coupons.dao.CompanyDAO;
 import com.netanel.coupons.exceptions.IdAlreadySetException;
 import com.netanel.coupons.jbeans.Company;
 import com.netanel.coupons.jbeans.Coupon;
 
-public class CompanyDBDAO implements CompanyDAO {
+public class CompanyDbDAO implements CompanyDAO {
 
 	@Override
 	public void createCompany(Company company) {
@@ -91,8 +94,19 @@ public class CompanyDBDAO implements CompanyDAO {
 
 	@Override
 	public Set<Company> getAllCompanies() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Company> companies = new HashSet<>(); 
+		try (Connection con = DB.connectDB("Company")){
+			String sqlCmdStr = "SELECT ID FROM Company";
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(sqlCmdStr);
+			while (rs.next()) {
+				companies.add(getCompany(rs.getLong(1)));
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return companies;
 	}
 
 	@Override
@@ -103,8 +117,19 @@ public class CompanyDBDAO implements CompanyDAO {
 
 	@Override
 	public boolean login(String compName, String password) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean rowFound = false;
+		try (Connection con = DB.connectDB("Company")){
+			String sqlCmdStr = "SELECT * FROM Company WHERE COMP_NAME=? AND PASSWORD=?";
+			PreparedStatement preStatement = con.prepareStatement (sqlCmdStr);
+			preStatement.setString(1, compName);
+			preStatement.setString(2, password);
+			ResultSet rs = preStatement.executeQuery();
+			rowFound = rs.next();			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rowFound;
 	}
 
 }

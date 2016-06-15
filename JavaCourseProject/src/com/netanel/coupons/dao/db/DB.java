@@ -1,4 +1,4 @@
-package com.netanel.coupons.dao;
+package com.netanel.coupons.dao.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

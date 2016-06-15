@@ -19,6 +19,8 @@ public class Company {
 	//
 	// Constructors
 	//
+	public Company() { }
+	
 	public Company(String compName, String password, String email) {
 		this.compName = compName;
 		this.password = password;
@@ -26,15 +28,13 @@ public class Company {
 	}
 	
 	public Company(long newId, String compName, String password, String email) {
+		this(compName, password, email);
 		try {
 			setId(newId);
 		} catch (IdAlreadySetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.compName = compName;
-		this.password = password;
-		this.email = email;
 	}
 
 	//
@@ -98,6 +98,64 @@ public class Company {
 	public String toString() {
 		return "Company [id=" + id + ", compName=" + compName + ", Password=" + password + ", email=" + email
 				+ ", coupons=" + coupons + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((compName == null) ? 0 : compName.hashCode());
+		result = prime * result + ((coupons == null) ? 0 : coupons.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Company other = (Company) obj;
+		if (compName == null) {
+			if (other.compName != null) {
+				return false;
+			}
+		} else if (!compName.equals(other.compName)) {
+			return false;
+		}
+		if (coupons == null) {
+			if (other.coupons != null) {
+				return false;
+			}
+		} else if (!coupons.equals(other.coupons)) {
+			return false;
+		}
+		if (email == null) {
+			if (other.email != null) {
+				return false;
+			}
+		} else if (!email.equals(other.email)) {
+			return false;
+		}
+		if (id != other.id) {
+			return false;
+		}
+		if (password == null) {
+			if (other.password != null) {
+				return false;
+			}
+		} else if (!password.equals(other.password)) {
+			return false;
+		}
+		return true;
 	}
 	
 	

@@ -6,16 +6,20 @@ public class Customer {
 	//
 	// Attributes
 	//
-	private long id;
+	private static long idCount = 1;
+	private long id=-1;
 	private String custName;
-	private String Password;
+	private String password;
 	private HashSet<Coupon> coupons;
 	
 	//
 	// Constructor
 	//
-	public Customer() {
+	public Customer() {	}
 	
+	public Customer(String custName, String password) {
+		this.custName = custName;
+		this.password = password;
 	}
 	
 	//
@@ -30,7 +34,7 @@ public class Customer {
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public HashSet<Coupon> getCoupons() {
@@ -46,7 +50,7 @@ public class Customer {
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 	public void setCoupons(HashSet<Coupon> coupons) {
@@ -55,8 +59,58 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", custName=" + custName + ", Password=" + Password + ", coupons=" + coupons
+		return "Customer [id=" + id + ", custName=" + custName + ", password=" + password + ", coupons=" + coupons
 				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((coupons == null) ? 0 : coupons.hashCode());
+		result = prime * result + ((custName == null) ? 0 : custName.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Customer other = (Customer) obj;
+		if (coupons == null) {
+			if (other.coupons != null) {
+				return false;
+			}
+		} else if (!coupons.equals(other.coupons)) {
+			return false;
+		}
+		if (custName == null) {
+			if (other.custName != null) {
+				return false;
+			}
+		} else if (!custName.equals(other.custName)) {
+			return false;
+		}
+		if (id != other.id) {
+			return false;
+		}
+		if (password == null) {
+			if (other.password != null) {
+				return false;
+			}
+		} else if (!password.equals(other.password)) {
+			return false;
+		}
+		return true;
 	}
 	
 	
