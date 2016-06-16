@@ -1,6 +1,7 @@
 package com.netanel.coupons.app;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,7 +13,8 @@ import com.netanel.coupons.jbeans.CouponType;
 
 public class Test {
 	public static void main(String[] args) throws Exception {
-		DB.connectDB("Company").createStatement().executeUpdate("DELETE FROM Company");
+		DB.connectDB().createStatement().executeUpdate("DELETE FROM Company");
+		DB.connectDB().createStatement().executeUpdate("UPDATE sqlite_sequence set seq=0");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		Company a = new Company("CompA", "1234", "compa@compa.com");
@@ -45,8 +47,15 @@ public class Test {
 		db1.createCompany(d);
 		
 		System.out.println(db1.getAllCompanies());
-//		ResultSet rs = DB.connectDB("Company").createStatement().executeQuery("SELECT * FROM Company WHERE COMP_NAME='CompA' AND PASSWORD='12345'");
-//		System.out.println(rs.next());
+//		Statement stat = DB.connectDB().createStatement();
+//		stat.executeUpdate("INSERT INTO Company (COMP_NAME, PASSWORD, EMAIL) VALUES('blag','b','c')");
+//		ResultSet rs = stat.getGeneratedKeys();
+//		rs.next();
+//		System.out.println(rs.getInt(1));
+//		System.out.println("generatedkeyId: " + stat.getGeneratedKeys());
+		//ResultSet rs = DB.connectDB().createStatement().executeQuery("SELECT * FROM Company WHERE COMP_NAME='CompA' AND PASSWORD='12345'");
+		
+
 		
 		
 		System.out.println(db1.login("CompA", "1234"));

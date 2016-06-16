@@ -5,8 +5,10 @@ import java.util.*;
 import com.netanel.coupons.jbeans.*;
 
 public interface CompanyDAO {
-	public void createCompany(Company company);
+	public long createCompany(Company company);
 	
+	public void removeCompany(long id);
+	public void removeCompany(String compName);
 	public void removeCompany(Company company);
 	
 	public void updateCompany(Company company);

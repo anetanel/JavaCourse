@@ -8,8 +8,9 @@ public class Company {
 	//
 	// Attributes
 	//
-	private static long idCount = 1;
-	private long id=-1;
+	//private static long idCount = 1;
+	//private long id=-1;
+	private long id;
 	private String compName;
 	private String password;
 	private String email;
@@ -27,14 +28,15 @@ public class Company {
 		this.email = email;
 	}
 	
-	public Company(long newId, String compName, String password, String email) {
+	public Company(long id, String compName, String password, String email) {
 		this(compName, password, email);
-		try {
-			setId(newId);
-		} catch (IdAlreadySetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.id = id;
+//		try {
+//			setId(newId);
+//		} catch (IdAlreadySetException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	//
@@ -61,21 +63,21 @@ public class Company {
 		return coupons;
 	}
 
-	public void setId() throws IdAlreadySetException{
-		if (id == -1) {
-			id = idCount++;
-		} else {
-			throw new IllegalArgumentException("Only new IDs (-1) are allowed to be changed");
-		}
-	}
+//	public void setId() throws IdAlreadySetException{
+//		if (id == -1) {
+//			id = idCount++;
+//		} else {
+//			throw new IllegalArgumentException("Only new IDs (-1) are allowed to be changed");
+//		}
+//	}
 	
-	private void setId(long newId) throws IdAlreadySetException{
-		if (id == -1) {
-			id = newId;
-		} else {
-			throw new IllegalArgumentException("Only new IDs (-1) are allowed to be changed");
-		}
-	}
+//	private void setId(long id) {
+//		//if (id == -1) {
+//			this.id = id;
+////		} else {
+////			throw new IllegalArgumentException("Only new IDs (-1) are allowed to be changed");
+////		}
+//	}
 	
 	public void setCompName(String compName) {
 		this.compName = compName;

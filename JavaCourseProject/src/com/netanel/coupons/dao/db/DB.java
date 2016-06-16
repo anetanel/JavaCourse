@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DB {
-	public static Connection connectDB(String table) throws ClassNotFoundException, SQLException {
+	public static Connection connectDB() throws ClassNotFoundException, SQLException {
 		String dbDriver = "org.sqlite.JDBC";
 		String url = "jdbc:sqlite:db/CouponsDB.db";
 		Class.forName(dbDriver);
