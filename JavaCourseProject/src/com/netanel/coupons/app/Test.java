@@ -50,6 +50,7 @@ public class Test {
 		
 		
 		System.out.println(db1.login("CompA", "1234"));
+		System.out.println(db1.login("CompA", "1234"));
 		
 		
 		
